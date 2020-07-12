@@ -1,3 +1,5 @@
 module.exports.doctor=function(req,res){
-    return res.end('<h1>Login Or Register for Doctor </h1>')
+    return res.render('doctor',{
+        title:"Doctor"
+    });
 }
