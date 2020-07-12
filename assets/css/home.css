@@ -3,7 +3,7 @@ body{
     text-align: center;
     background-image: url(../img/bg.jpg);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    opacity: 0.8;
+    opacity: 0.9;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -22,11 +22,11 @@ body{
   }
   .right {
     right: 300;
-    background-color: lightblue;
+    background: linear-gradient(to right, #2193b0, #6dd5ed);
   }
   .left {
     left: 300;
-    background-color: lightblue;
+    background: linear-gradient(to right, #2193b0, #6dd5ed);
   }
   .centered {
     position: absolute;
