@@ -6,16 +6,16 @@ const patientSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    password: {
-        type: String,
-        required: true
-    },
     name: {
         type: String,
         required: true
     },
     contactnumber:{
         type:Number,
+        required:true
+    },
+    status:{
+        type:String,
         required:true
     }
 }, {

@@ -63,15 +63,10 @@ module.exports.createSession = function(req, res){
 
     // steps to authenticate
     // find the user
-    Patient.findOne({email: req.body.email}, function(err, patient){
+    Patient.findOne({contactnumber: req.body.contactnumber}, function(err, patient){
         if(err){console.log('error in finding user in signing in'); return}
         // handle user found
         if (patient){
-
-            // handle password which doesn't match
-            if (patient.password != req.body.password){
-                return res.redirect('back');
-            }
 
             // handle session creation
             res.cookie('patient_id', patient.id);
