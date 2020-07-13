@@ -49,7 +49,7 @@ module.exports.create = function(req, res){
         if(err){console.log('error in finding user in signing up'); return}
 
         if (!doctor){
-            Doctor.create(req.body, function(err, user){
+            Doctor.create(req.body, function(err, doctor){
                 if(err){console.log('error in creating user while signing up'); return}
 
                 return res.redirect('/doctors/login');

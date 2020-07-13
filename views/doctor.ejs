@@ -7,9 +7,20 @@
     </head>
     <body>
         <div class="main">
-            <p>Name: <%= doctor.name %></p>
-            <p>Email: <%= doctor.email %></p>
-    
+            <img id="drimg" src="/img/drimg.jpg" alt="IMG">
+            <p>Dr. <%= doctor.name %></p>
+            <p><%= doctor.email %></p>
+            <div class="" id="patientcheck">
+                <h2>Patient Check-Up</h2>
+                <h3>Is Patient Registered?</h3>
+                <input type="text" name="pat-number" id="pat-number" placeholder="Contact Number">
+                <br>
+                <br>
+                <br>
+                <a id="patient-list" href="#">Patient's Report</a>
+                <a id="patient-list" href="#">Patient's List</a>
+            </div>
         </div>
+        
     </body>
 </html>
