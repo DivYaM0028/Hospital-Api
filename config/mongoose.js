@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/hospital_development');
+mongoose.connect('mongodb://localhost/hospital_development_new');
 
 const db = mongoose.connection;
 

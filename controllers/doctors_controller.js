@@ -1,25 +1,45 @@
 const Doctor = require('../models/doctor');
 
-module.exports.doctor=function(req,res){
-    return res.render('doctor',{
-        title:"Doctor"
-    });
+
+module.exports.doctor = function(req, res){
+    if (req.cookies.doctor_id){
+        Doctor.findById(req.cookies.doctor_id, function(err, doctor){
+            if (doctor){
+                return res.render('doctor', {
+                    title: "Doctor's Profile",
+                    doctor: doctor
+                })
+            }else{
+                return res.redirect('/doctors/login');
+
+            }
+        });
+    }else{
+        return res.redirect('/doctors/login');
+
+    }
+
+
+    
 }
 
-module.exports.register = function(req,res){
-    return res.render('doctor_register',{
-        title:"Register"
+
+// render the sign up page
+module.exports.register = function(req, res){
+    return res.render('doctor_register', {
+        title: "Register"
     })
 }
 
-module.exports.login = function(req,res){
-    return res.render('doctor_login',{
-        title:"Login"
+
+// render the sign in page
+module.exports.login = function(req, res){
+    return res.render('doctor_login', {
+        title: "Login"
     })
 }
 
-
-// get the register data
+// get the sign up data
 module.exports.create = function(req, res){
     if (req.body.password != req.body.confirm_password){
         return res.redirect('back');
@@ -29,7 +49,7 @@ module.exports.create = function(req, res){
         if(err){console.log('error in finding user in signing up'); return}
 
         if (!doctor){
-            Doctor.create(req.body, function(err, doctor){
+            Doctor.create(req.body, function(err, user){
                 if(err){console.log('error in creating user while signing up'); return}
 
                 return res.redirect('/doctors/login');
@@ -41,17 +61,14 @@ module.exports.create = function(req, res){
     });
 }
 
-module.exports.createSession = function(req,res){
 
-}
-
-// login and create a session for the user
+// sign in and create a session for the user
 module.exports.createSession = function(req, res){
 
     // steps to authenticate
-    // find the doctor
+    // find the user
     Doctor.findOne({email: req.body.email}, function(err, doctor){
-        if(err){console.log('error in finding doctor in signing in'); return}
+        if(err){console.log('error in finding user in signing in'); return}
         // handle user found
         if (doctor){
 
@@ -60,13 +77,22 @@ module.exports.createSession = function(req, res){
                 return res.redirect('back');
             }
 
+            // handle session creation
+            res.cookie('doctor_id', doctor.id);
             return res.redirect('/doctors/doctor');
 
         }else{
+            // handle user not found
+
             return res.redirect('back');
         }
 
 
     });
-   
+
+ 
+
+    
+
+    
 }
