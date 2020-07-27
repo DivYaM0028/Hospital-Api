@@ -5,13 +5,13 @@ const jwt = require('jsonwebtoken');
 
 const patients_controller = require('../controller/patients_controller'); 
 
-//---- routing to patient registeration
+//patients/register
 router.post('/register', passport.authenticate('jwt', {session:false}), patients_controller.register);
 
-//---- routing to creating patient report
+//patients/:id/create_report
 router.post('/:id/create_report', passport.authenticate('jwt', {session:false}), patients_controller.create_report);
 
-//--- routing to show all report of the patient
+//patients/:id/all_reports
 router.get('/:id/all_reports', passport.authenticate('jwt', {session:false}), patients_controller.all_reports);
 
 module.exports = router;

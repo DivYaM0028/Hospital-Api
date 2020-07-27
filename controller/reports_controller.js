@@ -2,9 +2,8 @@ const Patients = require("../models/patients");
 const Doctor = require("../models/doctors");
 const Report = require("../models/reports");
 
-//---- display all reports
+// Display all reports
 module.exports.all_report = async function (req, res) {
-  //---- if no status is present
   if (!req.params) {
     return res.status(404).json({
       message: "missing params",
@@ -12,22 +11,19 @@ module.exports.all_report = async function (req, res) {
   }
 
   try {
-    //---- find report sort it and populate patient info
     let report = await Report.find({ status: req.params.status })
       .sort("createdAt")
       .populate("doctor", "username -_id")
       .populate("patient", "name phone -_id");
-    // .populate('patient');
-
-    //---- if report present show reports else give err
+    
     if (report) {
       return res.status(200).json({
         data: { report },
-        message: "All report of this status",
+        message: "All Reports",
       });
     } else {
       return res.status(404).json({
-        message: "No Report for the given Status!",
+        message: "No Report Found!",
       });
     }
   } catch (err) {

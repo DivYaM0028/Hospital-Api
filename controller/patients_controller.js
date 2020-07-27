@@ -21,41 +21,36 @@ module.exports.register = async function (req, res) {
       });
     } else {
       return res.status(409).json({
-        message: "Patient already registered",
+        message: "Patient Already registered",
         Patient_ID: patient._id,
       });
     }
   } catch (err) {
     return res.status(400).json({
-      message: "Missing Fields!!",
+      message: "Missing Name or PhoneNumber!!",
     });
   }
 };
 
-//---- create patient report
+// Patient Report
 module.exports.create_report = async function (req, res) {
-  //console.log("Patient id:", req.params.id);
-  //console.log(req.user.id); //--- login doctor id
-  //console.log(req.body);
-
+  
   try {
     let patient = await Patients.findById(req.params.id);
-    // console.log("search:", patient._id);
     let doctor = await Doctor.findById(req.user.id);
     if (patient) {
-      //---- creating report
+      //Creating Report
       let report = await Report.create({
         status: req.body.status,
         doctor: doctor._id,
         patient: patient._id,
       });
 
-      //---- saveing report ref to patients
       patient.report.push(report._id);
       patient.save();
 
       return res.status(200).json({
-        message: " Report Successfully created",
+        message: " Report Created",
         Report: {
           Status: report.status,
           Doctor: doctor.username,
