@@ -1,6 +1,6 @@
-const Patients = require("../../models/patients");
-const Doctor = require("../../models/doctors");
-const Report = require("../../models/reports");
+const Patients = require("../models/patients");
+const Doctor = require("../models/doctors");
+const Report = require("../models/reports");
 
 //---- display all reports
 module.exports.all_report = async function (req, res) {

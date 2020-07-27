@@ -11,26 +11,26 @@ let should = chai.should();
 
 chai.use(chaiHttp);
 
-describe("Testsing - Patients Report :", () => {
+describe("Unit Testsing for Patients Report :", () => {
   let token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjFlOGE4MTI1NzU2OTIyMjRhM2UyZmQiLCJ1c2VybmFtZSI6InJvaGFuMiIsInBhc3N3b3JkIjoiJDJhJDEwJEJwOVBSOWsub0R4UWJNcGhwaXpQemU2WGQ3U3dzUHI1YjdpQWFSaGFFZGJ4MEY5RW0xdktHIiwiY3JlYXRlZEF0IjoiMjAyMC0wNy0yN1QwODowNDoxNy43NDlaIiwidXBkYXRlZEF0IjoiMjAyMC0wNy0yN1QwODowNDoxNy43NDlaIiwiX192IjowLCJpYXQiOjE1OTU4MzcwNjQsImV4cCI6MTY5NTgzNzA2NH0.vyLLZrdyXN5Tz3TBTG9RJqg2rB2kaFnBhIH-HWGRVLg";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjFlYzE0ZjllNTgwZjVjNmM3OWQ3ZGUiLCJ1c2VybmFtZSI6Inh5eiIsInBhc3N3b3JkIjoiJDJhJDEwJGxOZTVHcGdONVVESWRCQnY2a2R0R2UyN0gvaTFCMHA0TkN1LmdQclljc3N1U3hJZXl3eEpxIiwiY3JlYXRlZEF0IjoiMjAyMC0wNy0yN1QxMTo1ODowNy40ODlaIiwidXBkYXRlZEF0IjoiMjAyMC0wNy0yN1QxMTo1ODowNy40ODlaIiwiX192IjowLCJpYXQiOjE1OTU4NTEyNTksImV4cCI6MTY5NTg1MTI1OX0.xZpW-0dT6NrSObO5oti5Mw2z-AB0X9xQVHWJvUbqc3Q";
   let auth = "bearer " + token;
-  const patientID = "5f1e8aec2176cc10b8c47118"; //--patient 4
+  const patientID = "5f1ec2dc9e580f5c6c79d7e0"; //--patient 4
 
   /*
    *----Test case :- Create Patient Report
    */
 
   //---- Case 1: Doctor is not Authorize
-  describe("POST /api/patients/id/create_report", () => {
+  describe("POST /patients/id/create_report", () => {
     it("Return error because Doctor is not Authorize:", (done) => {
       let report = {
-        status: "negative",
+        status: "Negative",
       };
 
       chai
         .request(server)
-        .post(`/api/patients/${patientID}/create_report`)
+        .post(`/patients/${patientID}/create_report`)
         // .set("Authorization", auth)
         .send(report)
 
@@ -42,7 +42,7 @@ describe("Testsing - Patients Report :", () => {
   });
 
   //---- Case 2:  Missing Fields
-  describe("POST /api/patients/id/create_report", () => {
+  describe("POST /patients/id/create_report", () => {
     it("Return error because of Missing Input Fields :", (done) => {
       let report = {
         // status: "negative",
@@ -50,7 +50,7 @@ describe("Testsing - Patients Report :", () => {
 
       chai
         .request(server)
-        .post(`/api/patients/${patientID}/create_report`)
+        .post(`/patients/${patientID}/create_report`)
         .set("Content-Type", "application/x-www-form-urlencoded")
         .set("Authorization", auth)
         .send(report)
@@ -64,7 +64,7 @@ describe("Testsing - Patients Report :", () => {
   });
 
   //---- Case 2:  Report Successfully created
-  describe("POST /api/patients/id/create_report", () => {
+  describe("POST /patients/:id/create_report", () => {
     it("Report Successfully created:", (done) => {
       let report = {
         status: "Symptoms-Quarantine",
@@ -72,7 +72,7 @@ describe("Testsing - Patients Report :", () => {
 
       chai
         .request(server)
-        .post(`/api/patients/${patientID}/create_report`)
+        .post(`/patients/${patientID}/create_report`)
         .set("Content-Type", "application/x-www-form-urlencoded")
         .set("Authorization", auth)
         .send(report)

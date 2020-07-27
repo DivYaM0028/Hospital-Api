@@ -1,6 +1,6 @@
-const Patients = require("../../models/patients");
-const Doctor = require("../../models/doctors");
-const Report = require("../../models/reports");
+const Patients = require("../models/patients");
+const Doctor = require("../models/doctors");
+const Report = require("../models/reports");
 
 //----- register patent info
 module.exports.register = async function (req, res) {

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const reportSchema = new mongoose.Schema(
+const reportsSchema = new mongoose.Schema(
   {
     status: {
       type: String,
@@ -23,6 +23,6 @@ const reportSchema = new mongoose.Schema(
   }
 );
 
-const Reports = mongoose.model("Reports", reportSchema);
+const Reports = mongoose.model("Reports", reportsSchema);
 
 module.exports = Reports;
