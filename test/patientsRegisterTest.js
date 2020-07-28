@@ -41,8 +41,8 @@ describe("Unit_Testsing for Patients Register :", () => {
   describe("POST /patients/register", () => {
     it("Patient Successfully Created:", (done) => {
       let patient = {
-        name: "Mrs. Jojo ",
-        phone: 7878788787,
+        name: "Mr. Zuxxy ",
+        phone: 5656565678,
       };
       chai
         .request(server)

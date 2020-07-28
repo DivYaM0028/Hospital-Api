@@ -19,15 +19,15 @@ describe("Unit Testsing for Patients Report :", () => {
   
 
   //Test Case 1: Doctor is not Authorized
-  describe("POST /patients/id/create_report", () => {
+  describe("POST /patients/:id/create_report", () => {
     it("Return error because Doctor is not Authorize:", (done) => {
-      let report = {
+      let status = {
         status: "Positive",
       };
       chai
         .request(server)
         .post(`/patients/${patientID}/create_report`)
-        .send(report)
+        .send(status)
         .end((err, res) => {
           res.should.have.status(401);
           done();
@@ -38,16 +38,15 @@ describe("Unit Testsing for Patients Report :", () => {
   //Test Case 2:  Report Successfully created
   describe("POST /patients/:id/create_report", () => {
     it("Report Successfully created:", (done) => {
-      let report = {
-        status: "Symptoms-Quarantine",
+      let status = {
+        status: "Travel-Quarantine",
       };
-
       chai
         .request(server)
         .post(`/patients/${patientID}/create_report`)
         .set("Content-Type", "application/x-www-form-urlencoded")
         .set("Authorization", auth)
-        .send(report)
+        .send(status)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.have.property("message");
@@ -62,7 +61,7 @@ describe("Unit Testsing for Patients Report :", () => {
   //Test Case 3:  Missing Fields
   describe("POST /patients/:id/create_report", () => {
     it("Return error because of Missing Input Fields :", (done) => {
-      let report = {
+      let status = {
      
       };
       chai
@@ -70,7 +69,7 @@ describe("Unit Testsing for Patients Report :", () => {
         .post(`/patients/${patientID}/create_report`)
         .set("Content-Type", "application/x-www-form-urlencoded")
         .set("Authorization", auth)
-        .send(report)
+        .send(status)
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.have.property("message");
